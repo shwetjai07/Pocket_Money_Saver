@@ -2,10 +2,51 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pocket Money Saver</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    {% block content %} {% endblock %}
+<body class="bg-gray-100 text-gray-800">
+  <navbar>
+    <nav>
+      <div>
+        <img src="", height="30px", width="30px", alt="PMM-Logo">
+      </div>
+      <div>
+        <ul>
+          {% if user.is_authenticated %}
+            <li>Home</li>
+            <li>Manage Tags</li>
+            <li>Analysis</li>
+            <li>Contact Us</li>
+          {% else%}
+            <li>Login</li>
+            <li>Register</li>
+            <li>Contact Us</li>
+          {% endif %}
+        </ul>
+      </div>
+    </nav>
+  </navbar>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div class="p-4">
+          {% for category, message in messages %}
+            <div class="mb-4 p-3 rounded bg-{{ 'red-200' if category == 'danger' else 'green-200' }}">
+              {{ message }}
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+
+    {% block content %}
+    {% endblock %}
+
+    <footer>
+
+    </footer>
+
+    <script src="https://cdn.tailwindcss.com"></script>
 </body>
 </html>
