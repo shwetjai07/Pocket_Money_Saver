@@ -34,7 +34,9 @@ def index():
 
     balance = income - expense
 
-
+    txnList = [[txn.type, txn.tags, txn.reason, txn.date.date(), txn.amount] for txn in txns]
+    txnList.reverse()
+    
     return render_template('index.html',
                            user=current_user,
                            balance=balance,
@@ -43,7 +45,8 @@ def index():
                            income_week=income_week,
                            expense_week=expense_week,
                            income_month=income_month,
-                           expense_month=expense_month)
+                           expense_month=expense_month,
+                           txnList=txnList)
 
 
 @routes.route('/add-transaction', methods=['POST'])
